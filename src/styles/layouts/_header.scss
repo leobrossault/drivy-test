@@ -1,0 +1,16 @@
+header {
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  padding: 0.4rem 0;
+  background: $basic_white;
+  border-bottom: 1px solid rgba($basic_black, 0.12);
+
+  img {
+    max-width: 16rem;
+  }
+}

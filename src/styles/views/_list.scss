@@ -1,0 +1,19 @@
+.list-view {
+  margin-top: 5rem;
+
+  &__header {
+    margin-bottom: 5rem;
+    color: $basic_grey;
+    font-size: 1.8rem;
+
+    span {
+      color: $primary_color;
+    }
+  }
+
+  &__content {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+}

@@ -1,0 +1,17 @@
+/*
+* transitions
+*/
+@mixin transition($args) {
+  transition: $args ease-in-out;
+}
+
+/*
+* Gradient
+*/
+@mixin gradientBackground($direction) {
+  background: linear-gradient(
+    to $direction,
+    $primary_color 0%,
+    $secondary_color 100%
+  );
+}

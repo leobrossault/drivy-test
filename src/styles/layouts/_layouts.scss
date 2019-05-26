@@ -1,0 +1,10 @@
+@import 'header';
+@import 'footer';
+
+.container {
+  padding-top: 6.8rem;
+
+  &__content {
+    min-height: calc(100vh - 20.8rem);
+  }
+}

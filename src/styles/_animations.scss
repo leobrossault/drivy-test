@@ -1,0 +1,35 @@
+/*
+* Width animation
+*/
+@keyframes widthAnimation {
+  from {
+    max-width: 0;
+  }
+  to {
+    max-width: 100%;
+  }
+}
+
+/*
+* Fade in with translation
+*/
+@keyframes fadeInAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*
+* Fade out
+*/
+@keyframes fadeOut {
+  100% {
+    opacity: 0;
+  }
+}

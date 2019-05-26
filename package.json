@@ -1,0 +1,28 @@
+{
+  "name": "drivy-frontend-test",
+  "version": "0.0.1",
+  "description": "Drivy frontend challenge",
+  "repository": "https://github.com/drivy/jobs",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "node server/index.js"
+  },
+  "dependencies": {
+    "babel-eslint": "^10.0.1",
+    "express": "^4.16.4",
+    "preact": "^8.4.2",
+    "preact-redux": "^2.1.0",
+    "redux": "^4.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-plugin-react": "^7.13.0",
+    "node-sass": "^4.12.0",
+    "parcel-bundler": "^1.11.0",
+    "parcel-plugin-eslint": "^1.0.7",
+    "prettier": "^1.17.1",
+    "stylelint": "^10.0.1",
+    "stylelint-config-standard": "^18.3.0"
+  }
+}

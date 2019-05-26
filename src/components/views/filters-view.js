@@ -1,13 +1,21 @@
 /* @jsx h */
 import { h, render, Component } from 'preact';
+import { connect } from 'preact-redux';
 
+import { setFilters } from '../../store/actions';
 import Filters from '../filters';
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setFilters: filters => dispatch(setFilters(filters))
+  };
+}
 
 class FiltersView extends Component {
   constructor() {
     super();
 
-    this.filtersData = [];
+    this.filtersData = {};
   }
 
   /*
@@ -32,28 +40,21 @@ class FiltersView extends Component {
    */
   setFilter(filterData) {
     this.filtersData[filterData.name] = filterData;
-  }
-
-  /*
-   * Edmit filters data to the parent component
-   */
-  emitToFiltersData() {
-    this.props.callback(this.filtersData);
+    this.props.setFilters(this.filtersData);
   }
 
   render() {
     return (
       <div class="filters-view">
         <div class="wrapper">
-          <div class="df-center-y">
-            {this.getFiltersComponent()}
-
-            <button onClick={() => this.emitToFiltersData()}>Apply</button>
-          </div>
+          <div class="df-center-y">{this.getFiltersComponent()}</div>
         </div>
       </div>
     );
   }
 }
 
-export default FiltersView;
+export default connect(
+  null,
+  mapDispatchToProps
+)(FiltersView);

@@ -1,11 +1,23 @@
 /* @jsx h */
 import { h, render, Component } from 'preact';
+import { connect } from 'preact-redux';
 
 import FilterView from './filters-view';
 import CarCardView from './car-card-view';
 
 import LoaderUi from '../ui/loader-ui';
 
+/*
+ * Attribute prop from the store
+ */
+const mapStateToProps = state => {
+  return { filters: state.filters };
+};
+
+/*
+ * Define filters for the filter view
+ * We can add more filters easely
+ */
 const LIST_FILTERS = [
   {
     type: 'Number',
@@ -25,6 +37,9 @@ const LIST_FILTERS = [
     options: {
       label: 'Distance',
       suffix: 'km',
+      /*
+       * Populate select
+       */
       availableValues: () => {
         const step = 50;
         let values = [];
@@ -57,6 +72,13 @@ class ListView extends Component {
    */
   componentDidMount() {
     this.setCarsList();
+  }
+
+  /*
+   * Watch component props
+   */
+  componentWillReceiveProps(props) {
+    this.setCarsList(props.filters);
   }
 
   /*
@@ -131,10 +153,7 @@ class ListView extends Component {
   render() {
     return (
       <div class="list-view">
-        <FilterView
-          filters={LIST_FILTERS}
-          callback={data => this.setCarsList(data)}
-        />
+        <FilterView filters={LIST_FILTERS} />
 
         <div class="wrapper list-view__container">
           <div class="list-view__header">
@@ -155,4 +174,4 @@ class ListView extends Component {
   }
 }
 
-export default ListView;
+export default connect(mapStateToProps)(ListView);

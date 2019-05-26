@@ -1,5 +1,34 @@
+/*
+* Helper to center main div
+*/
 .wrapper {
   width: 90%;
   max-width: 120rem;
   margin: auto;
+}
+
+/*
+* Helper for flexbox
+*/
+[class*='df'] {
+  display: flex;
+}
+
+.df {
+  &-center {
+    align-items: center;
+    justify-content: center;
+
+    &-x {
+      justify-content: center;
+    }
+
+    &-y {
+      align-items: center;
+    }
+  }
+
+  &-spaces {
+    justify-content: space-between;
+  }
 }

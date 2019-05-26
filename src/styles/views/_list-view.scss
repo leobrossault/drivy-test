@@ -1,5 +1,7 @@
 .list-view {
-  margin-top: 5rem;
+  &__container {
+    margin-top: 5rem;
+  }
 
   &__header {
     margin-bottom: 5rem;
@@ -12,7 +14,6 @@
   }
 
   &__content {
-    display: flex;
     align-items: flex-start;
     flex-wrap: wrap;
   }

@@ -6,7 +6,7 @@ import { h } from 'preact';
  */
 function WelcomeUi() {
   return (
-    <div class="welcome-ui">
+    <div class="welcome-ui df-center">
       <div>
         <img src={require('../../assets/logo.svg')} alt="Drivy Logo" />
         <span />

@@ -1,8 +1,43 @@
 /* @jsx h */
 import { h, render, Component } from 'preact';
 
+import FilterView from './filters-view';
 import CarCardView from './car-card-view';
+
 import LoaderUi from '../ui/loader-ui';
+
+const LIST_FILTERS = [
+  {
+    type: 'Number',
+    name: 'duration',
+    options: {
+      label: 'Duration',
+      placeholder: 'Enter a day between 1 and 30',
+      suffix: 'day(s)',
+      min: 1,
+      max: 30,
+      step: 1
+    }
+  },
+  {
+    type: 'Select',
+    name: 'distance',
+    options: {
+      label: 'Distance',
+      suffix: 'km',
+      availableValues: () => {
+        const step = 50;
+        let values = [];
+
+        for (let y = 50; y <= 3000; y += 50) {
+          values.push(y);
+        }
+
+        return values;
+      }
+    }
+  }
+];
 
 class ListView extends Component {
   constructor() {
@@ -21,7 +56,16 @@ class ListView extends Component {
    * Fetch cars list when component did mount
    */
   componentDidMount() {
-    this.fetchCars().then(data => {
+    this.setCarsList();
+  }
+
+  /*
+   * Refresh data
+   */
+  setCarsList(filters) {
+    this.setState({ isLoaded: false });
+
+    this.fetchCars(filters).then(data => {
       this.setState({
         carsList: data,
         isLoaded: true
@@ -32,8 +76,17 @@ class ListView extends Component {
   /*
    * Fetch API to get cars
    */
-  fetchCars() {
-    return fetch('/cars.json')
+  fetchCars(filters) {
+    let url = '/cars.json';
+
+    /*
+     * Build query with filters
+     */
+    if (filters) {
+      url = `${url}${this.getQueryString(filters)}`;
+    }
+
+    return fetch(url)
       .then(res => {
         return res.json();
       })
@@ -55,21 +108,48 @@ class ListView extends Component {
     ));
   }
 
+  /*
+   * Formatted queries to fetch with filters
+   */
+  getQueryString(filters) {
+    let index = 0;
+    let queries = '';
+
+    for (let filter in filters) {
+      if (filters[filter].value) {
+        queries = `${queries}${index ? '&' : '?'}${filters[filter].name}=${
+          filters[filter].value
+        }`;
+      }
+
+      index++;
+    }
+
+    return queries;
+  }
+
   render() {
     return (
-      <div class="wrapper list-view">
-        {this.state.isLoaded ? (
-          <div>
-            <div class="list-view__header">
-              We have found <span>{this.state.carsList.length} results</span>{' '}
-              for your next trip.
-            </div>
+      <div class="list-view">
+        <FilterView
+          filters={LIST_FILTERS}
+          callback={data => this.setCarsList(data)}
+        />
 
-            <div class="list-view__content">{this.renderCarsList()}</div>
+        <div class="wrapper list-view__container">
+          <div class="list-view__header">
+            We have found{' '}
+            <span>
+              {this.state.carsList.length}{' '}
+              {this.state.carsList.length > 1 ? 'results' : 'result'}
+            </span>{' '}
+            for your next trip.
           </div>
-        ) : (
-          <LoaderUi />
-        )}
+
+          <div class="list-view__content df">{this.renderCarsList()}</div>
+        </div>
+
+        {!this.state.isLoaded && <LoaderUi />}
       </div>
     );
   }

@@ -6,7 +6,7 @@ import { h } from 'preact';
  */
 function LoaderUi() {
   return (
-    <div class="loader-ui">
+    <div class="loader-ui df-center">
       <div>
         <div class="loader-ui__spinner">
           <span />

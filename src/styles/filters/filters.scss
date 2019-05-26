@@ -1,0 +1,44 @@
+@import 'number-filter';
+@import 'select-filter';
+
+.filter {
+  label,
+  input,
+  select {
+    display: block;
+  }
+
+  label {
+    margin-bottom: 0.5rem;
+  }
+
+  input,
+  select {
+    width: 25rem;
+    max-width: 90%;
+    height: 3rem;
+    padding: 0 1rem;
+    font-size: 1.4rem;
+    border: 1px solid $basic_grey;
+
+    @include transition(border-color 0.4s);
+
+    &:focus {
+      border-color: $secondary_color;
+    }
+  }
+
+  select {
+    border-radius: 0;
+    -webkit-appearance: none;
+  }
+
+  + .filter {
+    margin-left: 2rem;
+  }
+
+  &__suffix {
+    margin-left: 0.5rem;
+    color: $basic_grey;
+  }
+}

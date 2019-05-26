@@ -6,12 +6,13 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "node server/index.js"
+    "start": "NODE_ENV=development node server/index.js"
   },
   "dependencies": {
     "babel-eslint": "^10.0.1",
     "express": "^4.16.4",
     "preact": "^8.4.2",
+    "preact-context": "^1.1.3",
     "preact-redux": "^2.1.0",
     "redux": "^4.0.1"
   },
